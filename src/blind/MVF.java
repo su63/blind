@@ -64,6 +64,8 @@ public class MVF extends Kernel {
 	public void run() {
 		int bid = this.getGlobalId();
 		if (bid>thr)return;
+		if(this.getPassId() != 0)
+			if(min[bid] < 512)return;
 		int blockx = bid % bx;
 		int blocky = bid / bx;
 		int pixP = (bx *64* blocky)+(8*blockx);
@@ -72,8 +74,9 @@ public class MVF extends Kernel {
 			for(int i = pass*16; i < pass*16 + 16;i++)
 			{
 				if(i == 0){min[bid] = 10000;res[bid] = 0;}
+				if(min[bid] < 2048)return;
 				int mot = pixP + m[i];
-				if(mot<0 || mot > r - (64 * bx))continue;
+				if(mot<0 || mot > r - (64 * bx))return;
 				int sum = 0;
 				for(int inblock = 0;inblock < 64;inblock++){
 					sum += abs(img1[pixP+b[inblock]]&0xFF - img2[mot+b[inblock]]&0xFF);
