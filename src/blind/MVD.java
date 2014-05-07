@@ -8,9 +8,6 @@ public class MVD extends Kernel {
 	private int by;
 	private int thr;
 	
-	private int[] xi;
-	private int[] yi;
-
 	private int[] m;
 	private int[] b;
 

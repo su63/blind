@@ -25,7 +25,6 @@ public class lod {
 			y = i.getHeight();
 			a.seekToFramePrecise(0);
 		} catch (IOException | JCodecException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
