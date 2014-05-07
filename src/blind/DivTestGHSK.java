@@ -31,7 +31,6 @@ public class DivTestGHSK {
 			a1 = load.getFrame();
 			Vec.setImage(a1, a2);
 			Vec.exacuteSlice();
-			System.out.println(Vec.getExecutionTime() + " ms");
 			int[] vectRez = Vec.getResults();
 			ref = map.apply(ref, vectRez);
 			cach.saveInter(ref, i);

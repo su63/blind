@@ -57,8 +57,10 @@ public class MVF extends Kernel {
 	public void exacuteSlice(){
 		firstStage = true;
 		execute(slice,8);
+		System.out.println(getExecutionTime()+" ms 1");
 		firstStage = false;
 		execute(slice,64);
+		System.out.println(getExecutionTime()+" ms 2");
 	}
 
 	@Override
