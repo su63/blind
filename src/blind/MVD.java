@@ -49,7 +49,7 @@ public class MVD extends Kernel {
 	}
 	public void exacuteSlice(){
 		//res = new int[thr];
-		execute(slice,12);
+		execute(slice,24);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class MVD extends Kernel {
 			if(mot<0 || mot > r - (64 * bx))return;
 			int sum = 0;
 			for(int inblock = 0;inblock < 64;inblock++){
-				sum += abs(img1[pixP+b[inblock]]&0xFF - img2[mot+b[inblock]]&0xFF);
+				sum = max(abs(img2[pixP+b[inblock]]&0xFF - img1[mot+b[inblock]]&0xFF),sum);
 				//sum += abs(img2[pixP+b[inblock]]&0xFF00 - img1[mot+b[inblock]]&0xFF00);
 				//sum += abs(img2[pixP+b[inblock]]&0xFF0000 - img1[mot+b[inblock]]&0xFF0000);
 			}

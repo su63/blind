@@ -51,6 +51,9 @@ public class MVF extends Kernel {
 	public int[] getResults(){
 		return res;
 	}
+	public int[] getThresh(){;
+		return min;
+	}
 	public void exacuteSlice(){
 		firstStage = true;
 		execute(slice,8);
@@ -65,7 +68,7 @@ public class MVF extends Kernel {
 		int bid = this.getGlobalId();
 		if (bid>thr)return;
 		if(this.getPassId() != 0)
-			if(min[bid] < 512)return;
+			if(min[bid] < 1)return;
 		int blockx = bid % bx;
 		int blocky = bid / bx;
 		int pixP = (bx *64* blocky)+(8*blockx);
@@ -79,9 +82,9 @@ public class MVF extends Kernel {
 				if(mot<0 || mot > r - (64 * bx))return;
 				int sum = 0;
 				for(int inblock = 0;inblock < 64;inblock++){
-					sum += abs(img1[pixP+b[inblock]]&0xFF - img2[mot+b[inblock]]&0xFF);
-					sum += abs(img2[pixP+b[inblock]]&0xFF00 - img1[mot+b[inblock]]&0xFF00)>>8;
-					sum += abs(img2[pixP+b[inblock]]&0xFF0000 - img1[mot+b[inblock]]&0xFF0000)>>16;
+					sum = max(abs(img1[pixP+b[inblock]]&0xFF - img2[mot+b[inblock]]&0xFF),sum);
+					//sum += abs(img2[pixP+b[inblock]]&0xFF00 - img1[mot+b[inblock]]&0xFF00)>>8;
+					//sum += abs(img2[pixP+b[inblock]]&0xFF0000 - img1[mot+b[inblock]]&0xFF0000)>>16;
 					if(sum>min[bid])inblock = 63;
 				}
 				if(sum < min[bid]){

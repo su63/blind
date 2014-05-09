@@ -47,16 +47,12 @@ public class PC {
 		try {
 			FileOutputStream out = new FileOutputStream(new File(Folder+number+".dat"));
 			for(int i = 0;i<vect.length;i++){
-				byte[] o = new byte[8];
-				o[0]=(byte) ((vect[i]&0xFF000000)>>24);
-				o[1]=(byte) ((vect[i]&0x00FF0000)>>16);
-				o[2]=(byte) ((vect[i]&0x0000FF00)>>8);
-				o[3]=(byte) ((vect[i]&0x000000FF));
-				o[4]=(byte) ((thresh[i]&0xFF000000)>>24);
-				o[5]=(byte) ((thresh[i]&0x00FF0000)>>16);
-				o[6]=(byte) ((thresh[i]&0x0000FF00)>>8);
-				o[7]=(byte) ((thresh[i]&0x000000FF));
-				out.write(o, 0, 8);
+				byte[] o = new byte[4];
+				o[0]=(byte) ((thresh[i]&0x0000FF)>>24);
+				o[1]=(byte) ((vect[i]&0xFF0000)>>16);
+				o[2]=(byte) ((vect[i]&0x00FF00)>>8);
+				o[3]=(byte) ((vect[i]&0x0000FF));
+				out.write(o, 0, 4);
 			}
 			out.close();			
 		} catch (IOException e) {
