@@ -28,14 +28,14 @@ public class DivTestGHSZ {
 		for(int i = 0;i < 100;i++){
 			a2 = a1.clone();
 			a1 = load.getFrame();
-			cach.saveIntra(a1, i);
+			//cach.saveIntra(a1, i);
 			Vec.setImage(a1, a2);
 			Vec.exacuteSlice();
 			int[] vectRez = Vec.getResults();
-			ref = map.apply(ref, vectRez);
+			ref = map.apply(a2, vectRez);
 			ref = DF.diff(a1, ref);
 			cach.saveInter(ref, i);
-			cach.saveVector(vectRez, Vec.getThresh(), i);
+			//cach.saveVector(vectRez, Vec.getThresh(), i);
 		}
 		
 	}

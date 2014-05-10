@@ -79,12 +79,12 @@ public class MVF extends Kernel {
 				if(i == 0){min[bid] = 10000;res[bid] = 0;}
 				if(min[bid] < 2048)return;
 				int mot = pixP + m[i];
-				if(mot<0 || mot > r - (64 * bx))return;
+				if(mot<0 || mot > r - (64 * bx))continue;
 				int sum = 0;
 				for(int inblock = 0;inblock < 64;inblock++){
-					sum = max(abs(img1[pixP+b[inblock]]&0xFF - img2[mot+b[inblock]]&0xFF),sum);
-					//sum += abs(img2[pixP+b[inblock]]&0xFF00 - img1[mot+b[inblock]]&0xFF00)>>8;
-					//sum += abs(img2[pixP+b[inblock]]&0xFF0000 - img1[mot+b[inblock]]&0xFF0000)>>16;
+					sum += abs(img1[pixP+b[inblock]]&0xFF - img2[mot+b[inblock]]&0xFF);
+					sum += abs(img1[pixP+b[inblock]]&0xFF00 - img2[mot+b[inblock]]&0xFF00)>>8;
+					sum += abs(img1[pixP+b[inblock]]&0xFF0000 - img2[mot+b[inblock]]&0xFF0000)>>16;
 					if(sum>min[bid])inblock = 63;
 				}
 				if(sum < min[bid]){
