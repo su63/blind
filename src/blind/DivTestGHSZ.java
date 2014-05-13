@@ -33,8 +33,9 @@ public class DivTestGHSZ {
 			Vec.exacuteSlice();
 			int[] vectRez = Vec.getResults();
 			ref = map.apply(a2, vectRez);
-			ref = DF.diff(a1, ref);
+			//int[] dif = DF.diff(a1, ref);
 			cach.saveInter(ref, i);
+			//ref = DF.cort(ref, dif);
 			//cach.saveVector(vectRez, Vec.getThresh(), i);
 		}
 		
